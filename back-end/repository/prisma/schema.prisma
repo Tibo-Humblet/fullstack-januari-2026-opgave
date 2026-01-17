@@ -12,6 +12,9 @@ model Teacher {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   learningPath  String
+
+  userId       Int
+  user         User      @relation(fields: [userId], references: [id])
 }
 
 model User {
@@ -22,4 +25,6 @@ model User {
   email     String    @unique
   password  String
   role      String
+
+  teachers Teacher[]
 }
