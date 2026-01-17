@@ -25,9 +25,15 @@ type AuthenticationResponse = {
     role: string;
 };
 
+type AuthenticationInput = {
+    username: string;
+    role: string;
+}
+
 export { 
     Role, 
     TeacherInput,
     UserInput, 
-    AuthenticationResponse 
+    AuthenticationResponse,
+    AuthenticationInput
 };

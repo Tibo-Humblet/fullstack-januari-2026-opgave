@@ -16,6 +16,8 @@
  */
 import express, { NextFunction, Request, Response } from 'express';
 import teacherService from '../service/teacher.service';
+import { checkRole } from '../middleware/checkRole';
+import { getAuth } from "../middleware/requireAuth";
 
 const teacherRouter = express.Router();
 
@@ -58,6 +60,8 @@ teacherRouter.get('/', async (req: Request, res: Response, next: NextFunction) =
  *         schema:
  *           type: string
  *         description: The learning path
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: The teacher with the updated learning path
@@ -65,11 +69,14 @@ teacherRouter.get('/', async (req: Request, res: Response, next: NextFunction) =
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Teacher'
+ *       403:
+ *         description: Forbidden (admin only)
  */
 teacherRouter.put(
     '/:teacherId/learningpath',
+    checkRole(["admin"]),
     async (req: Request, res: Response, next: NextFunction) => {
-        try {
+        try {  
            const teacherId = Number(req.params.teacherId);
            const learningPath = req.query.learningPath as string;
 
