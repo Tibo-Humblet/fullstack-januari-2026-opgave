@@ -7,7 +7,13 @@ const getAllTeachers = async (): Promise<Teacher[]> => {
         // Modify the prisma schema so that User information from the User model is included when fetching Teacher information.
         // Implement the mapping function in Teacher in order to return a domain object.
         // Run the seed.ts script again to add test data to the database.
-        return [];
+
+        const prismaTeacher = await database.teacher.findMany({
+            include: {
+                user: true,
+            }
+        });
+        return prismaTeacher.map(teacher => Teacher.from(teacher));
     } catch (error) {
         throw new Error('Database error. See server log for details.');
     }
