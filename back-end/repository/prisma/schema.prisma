@@ -28,3 +28,8 @@ model User {
 
   teachers Teacher[]
 }
+
+model Classroom {
+  id    Int     @id @default(autoincrement())
+  name  String  @unique
+}
