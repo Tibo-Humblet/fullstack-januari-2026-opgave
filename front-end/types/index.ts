@@ -1,3 +1,4 @@
+
 export type Teacher = {
   id: number;
   user: User;
@@ -13,6 +14,11 @@ export type User = {
   password?: string;
   role?: string;
 };
+
+export type Classroom = {
+  id?: number;
+  name: string;
+}
 
 export type StatusMessage = {
   message: string;

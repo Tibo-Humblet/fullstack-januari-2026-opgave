@@ -11,7 +11,7 @@ classroomRouter.get('/', async (req: Request, res: Response, next:  NextFunction
 	} catch (error) { next(error); }
 });
 
-classroomRouter.put('/admin/create', checkRole(["admin"]), async (req: Request, res: Response, next: NextFunction) => {
+classroomRouter.post('/admin/create', checkRole(["admin"]), async (req: Request, res: Response, next: NextFunction) => {
 	try {
 		const classroomInput = <ClassroomInput>req.body;
 		const response = await classroomService.createClassroom(classroomInput);
@@ -69,7 +69,7 @@ export { classroomRouter };
 	/**
 	 * @swagger
 	 * /classrooms/admin/create:
-	 *   put:
+	 *   post:
 	 *     summary: Create a new classroom (admin only)
 	 *     tags:
 	 *       - Classrooms
